@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sample Form Example</title>
+    <style>
+        body {
+            background-color:rgb(199, 252, 199);
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        form {
+            background-color: rgb(221, 244, 236);
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%; /* Set the width of the form */
+            max-width: 500px; /* Set a maximum width to ensure readability */
+            margin: auto; /* Center the form horizontally */
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: lightblue;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 15px; /* Add space below the button */
+        }
+
+        #totalPrice {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px; /* Add space below the total price */
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <form id="myForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="dropdown1">Dropdown 1:</label>
+        <select id="dropdown1">
+            <option value="option1">Option 1</option>
+            <option value="option2">Option 2</option>
+            <option value="option3">Option 3</option>
+        </select>
+        <label for="dropdown2">Dropdown 2:</label>
+        <select id="dropdown2">
+            <option value="optionA">Option A</option>
+            <option value="optionB">Option B</option>
+            <option value="optionC">Option C</option>
+        </select>
+        <label for="adults">Number of Adults:</label>
+        <input type="number" id="adults" name="adults" min="0">
+        <label for="children">Number of Children:</label>
+        <input type="number" id="children" name="children" min="0">
+        <button type="submit">Submit</button>
+        <label for="totalPrice">Total Price:</label>
+        <input type="text" id="totalPrice" disabled>
+    </form>
+
+    <script>
+        document.getElementById('myForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form submission
+
+            // Get form values
+            var name = document.getElementById('name').value;
+            var phone = document.getElementById('phone').value;
+            var email = document.getElementById('email').value;
+            var dropdown1 = document.getElementById('dropdown1').value;
+            var dropdown2 = document.getElementById('dropdown2').value;
+            var adults = parseInt(document.getElementById('adults').value);
+            var children = parseInt(document.getElementById('children').value);
+
+            // Log form values in the console
+            console.log("Name: " + name);
+            console.log("Phone Number: " + phone);
+            console.log("Email: " + email);
+            console.log("Dropdown 1: " + dropdown1);
+            console.log("Dropdown 2: " + dropdown2);
+            console.log("Number of Adults: " + adults);
+            console.log("Number of Children: " + children);
+
+            // Calculate total price
+            var totalPrice = calculateTotalPrice(adults, children);
+
+            // Display total price
+            document.getElementById('totalPrice').value = totalPrice;
+        });
+
+        // Function to calculate total price
+        function calculateTotalPrice(adults, children) {
+            var adultPrice = 200; // Price per adult
+            var childPrice = 100; // Price per child
+            return (adults * adultPrice) + (children * childPrice);
+        }
+    </script>
+</body>
+</html>
