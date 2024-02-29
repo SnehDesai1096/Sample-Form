@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Save Form Inputs to Text File</title>
+</head>
+<body>
+    <form id="myForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name"><br><br>
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email"><br><br>
+        
+        <label for="message">Message:</label><br>
+        <textarea id="message" name="message" rows="4" cols="50"></textarea><br><br>
+        
+        <button type="button" onclick="saveToFile()">Save</button>
+    </form>
+
+    <script>
+        function saveToFile() {
+            // Get form inputs
+            var name = document.getElementById('name').value;
+            var email = document.getElementById('email').value;
+            var message = document.getElementById('message').value;
+
+            // Construct data string
+            var data = "Name: " + name + "\n" +
+                       "Email: " + email + "\n" +
+                       "Message: " + message + "\n\n";
+
+            // Create a blob object from the data
+            var blob = new Blob([data], { type: 'text/plain;charset=utf-8' });
+
+            // Create or open the file
+            var file = new File([blob], 'form_data.txt', { type: 'text/plain;charset=utf-8' });
+
+            // Save the file using the FileSaver.js library
+            saveAs(file);
+
+            // Clear form inputs
+            document.getElementById('name').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('message').value = '';
+        }
+    </script>
+
+    <!-- Include the FileSaver.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+</body>
+</html>
